@@ -29,9 +29,9 @@ class MicropostsController < ApplicationController
     respond_to do |format|
       if @micropost.save
         format.html { redirect_to @micropost, notice: 'Micropost was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @micropost }
+        format.json { render :show, status: :created, location: @micropost }
       else
-        format.html { render action: 'new' }
+        format.html { render :new }
         format.json { render json: @micropost.errors, status: :unprocessable_entity }
       end
     end
@@ -43,9 +43,9 @@ class MicropostsController < ApplicationController
     respond_to do |format|
       if @micropost.update(micropost_params)
         format.html { redirect_to @micropost, notice: 'Micropost was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render :show, status: :ok, location: @micropost }
       else
-        format.html { render action: 'edit' }
+        format.html { render :edit }
         format.json { render json: @micropost.errors, status: :unprocessable_entity }
       end
     end
@@ -56,7 +56,7 @@ class MicropostsController < ApplicationController
   def destroy
     @micropost.destroy
     respond_to do |format|
-      format.html { redirect_to microposts_url }
+      format.html { redirect_to microposts_url, notice: 'Micropost was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
